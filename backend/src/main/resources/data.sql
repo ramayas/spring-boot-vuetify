@@ -1,0 +1,25 @@
+INSERT INTO faculties (id, name) VALUES (1, 'English');
+INSERT INTO faculties (id, name) VALUES (2, 'Mathematics');
+INSERT INTO faculties (id, name) VALUES (3, 'PDHPE');
+INSERT INTO faculties (id, name) VALUES (4, 'Computing Studies');
+INSERT INTO faculties (id, name) VALUES (5, 'Creative Arts');
+INSERT INTO faculties (id, name) VALUES (6, 'LOTE');
+INSERT INTO faculties (id, name) VALUES (7, 'History');
+
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (1, 'Arvin Jastek', 'user1@example.org', 7);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (2, 'Peter Allen', 'user2@example.org', 6);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (3, 'Tom Jones', 'user3@example.org', 2);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (4, 'Wiki Wiki', 'user4@example.org', 2);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (5, 'John', 'user5@example.org', 6);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (6, 'Natasha Series', 'user6@example.org', 5);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (7, 'John Who 1', 'user7@example.org', 1);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (8, 'John Who 2', 'user8@example.org', 2);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (9, 'John Who 3', 'user9@example.org', 3);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (10, 'John Who 4', 'user10@example.org', 4);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (11, 'John Who 5', 'user11@example.org', 5);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (12, 'John Who 6', 'user12@example.org', 6);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (13, 'John Who 7', 'user13@example.org', 7);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (14, 'John Who 8', 'user14@example.org', 1);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (15, 'John Who 9', 'user15@example.org', 2);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (16, 'John Who 10', 'user16@example.org', 3);
+INSERT INTO teachers (id, name, email, faculty_id) VALUES (17, 'John Who 11', 'user17@example.org', 4);

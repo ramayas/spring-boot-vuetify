@@ -1,18 +1,22 @@
 <template>
   <v-app>
     <v-content>
-      <HelloWorld/>
+      <!--todo: menu bar-->
+      <!--<TeacherList/>-->
+      <TeacherNew/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+// import TeacherList from './components/TeacherList'
+import TeacherNew from './components/TeacherNew'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    // TeacherList,
+    TeacherNew
   },
   data () {
     return {

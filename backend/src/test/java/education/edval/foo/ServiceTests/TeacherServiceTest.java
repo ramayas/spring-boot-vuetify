@@ -31,4 +31,13 @@ public class TeacherServiceTest {
 
     }
 
+    @Test
+    public void filterByNullOrEmptyReturnAll(){
+
+        assertThat(teacherService.findByNameOrEmail(null, null, 1, 5, Sort.by("name").ascending()).get(0).getName(), equalTo("Arvin Jastek"));
+
+        assertThat(teacherService.findByNameOrEmail("", "", 1, 5, Sort.by("name").ascending()).get(0).getName(), equalTo("Arvin Jastek"));
+
+    }
+
 }

@@ -70,9 +70,7 @@ public class TeacherServiceImpl implements TeacherService {
                 criteria.add(cb.like(cb.lower(teacher.get("email")), email.toLowerCase() + "%"));
             }
 
-            if (criteria.size() == 0) {
-                throw new RuntimeException("no criteria");
-            } else if (criteria.size() == 1) {
+            if (criteria.size() == 1) {
                 cq.where(criteria.get(0));
             } else {
                 cq.where(cb.and(criteria.toArray(new Predicate[0])));

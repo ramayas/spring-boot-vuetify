@@ -9,7 +9,7 @@
         hide-details>
         </v-text-field>
     </div>
-      <div id="search-term-email"> 
+      <div id="search-term-email">
         <v-text-field
         v-model="searchEmail"
         label="by email"
@@ -20,7 +20,7 @@
       <div id="search-btn">
         <v-btn small color="primary" @click="getDataFromApi">search</v-btn>
       </div>
-    
+
       <div class="teacher-list">
         <v-data-table
         :headers="headers"
@@ -35,17 +35,18 @@
             <td>{{ props.item.faculty.name }}</td>
           </template>
         </v-data-table>
-      </div>  
+      </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
 
   data () {
     return {
-      searchName:'John',
-      searchEmail:'',
+      searchName: 'John',
+      searchEmail: '',
       headers: [
         {
           text: 'Name',
@@ -84,13 +85,24 @@ export default {
   methods: {
     getDataFromApi () {
       this.loading = true
+
       return new Promise((resolve, reject) => {
+        let items = []
 
-        let items=[];
+        const { sortBy, descending, page, rowsPerPage } = this.pagination
 
-        const { sortBy, descending, page, rowsPerPage } = this.pagination;
-        
-        fetch('api/teachers?filter=name:'+ this.searchName, {
+        let api = 'api/teachers?filter='
+        if (this.searchName !== '' && this.searchEmail === '') {
+          api += 'name:' + this.searchName
+        } else if (this.searchName !== '' && this.searchEmail !== '') {
+          api += 'name:' + this.searchName + ',email:' + this.searchEmail
+        } else if (this.searchName === '' && this.searchEmail !== '') {
+          api += 'email:' + this.searchEmail
+        }
+
+        // to do: add pagination in url
+
+        /* fetch(api, {
           method: 'GET',
           headers: {
             'Access-Control-Allow-Origin': '*',
@@ -109,46 +121,59 @@ export default {
 
               response.json().then(function (data) {
                 console.log(data)
-                
-                items=data
-                
+
+                items = data
               })
             }
           )
           .catch(function (err) {
             console.log('Fetch Error :-S', err)
+          }) */
+
+        axios
+          .get(api,
+            {
+              method: 'GET',
+              headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token',
+                'crossDomain': 'true',
+                'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
+                'Access-Control-Allow-Credentials': 'true'
+              } })
+          .then(response => (items = response.data))
+          .catch(error => console.log(error))
+
+        const total = items.length
+
+        if (this.pagination.sortBy) {
+          items = items.sort((a, b) => {
+            const sortA = a[sortBy]
+            const sortB = b[sortBy]
+
+            if (descending) {
+              if (sortA < sortB) return 1
+              if (sortA > sortB) return -1
+              return 0
+            } else {
+              if (sortA < sortB) return -1
+              if (sortA > sortB) return 1
+              return 0
+            }
           })
+        }
 
-          const total = items.length
+        if (rowsPerPage > 0) {
+          items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
+        }
 
-          if (this.pagination.sortBy) {
-            items = items.sort((a, b) => {
-              const sortA = a[sortBy]
-              const sortB = b[sortBy]
-
-              if (descending) {
-                if (sortA < sortB) return 1
-                if (sortA > sortB) return -1
-                return 0
-              } else {
-                if (sortA < sortB) return -1
-                if (sortA > sortB) return 1
-                return 0
-              }
-            })
-          }
-
-          if (rowsPerPage > 0) {
-            items = items.slice((page - 1) * rowsPerPage, page * rowsPerPage)
-          }
-
-          setTimeout(() => {
-            this.loading = false
-            resolve({
-              items,
-              total
-            })
-          }, 1000)
+        setTimeout(() => {
+          this.loading = false
+          resolve({
+            items,
+            total
+          })
+        }, 1000)
       })
     }
 
@@ -175,8 +200,7 @@ div#search-term-email {
 }
 div#search-btn {
     margin-left: 15%;
-  
-   
+
 }
 
 </style>

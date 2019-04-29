@@ -1,10 +1,3 @@
-# Edval Web Developer Test
-You are expected to complete backend and frontend tasks. Your solution should be compressed and sent to hr@edval.education 
-with "Edval Web Developer Test" as the subject and "edval-web-developer-test-yourname-date.zip" as the filename.
-You can upload the solution to G-Drive and send us the link if you cannot send it as an attachment.
-
-Good luck!
-
 
 ### Backend
 
